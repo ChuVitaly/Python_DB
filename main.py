@@ -9,22 +9,22 @@ with conn.cursor() as cur:
     # """)
 
     # Создание таблицы
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS customers(
-        CustomerId SERIAL PRIMARY KEY,
-        Name VARCHAR(40),
-        Lastname VARCHAR(60) NOT NULL,
-        Email VARCHAR(40) NOT NULL
-    );
-    """)
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS phone(
-        PhoneId PRIMARY KEY,
-        CustomerId INT FOREIGN KEY REFERENCES customers(CustomerId),
-        PhoneNumber VARCHAR(50)
-    );
-    """)
+    def create_tables():
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS customers(
+            CustomerId SERIAL PRIMARY KEY,
+            Name VARCHAR(40),
+            Lastname VARCHAR(60) NOT NULL,
+            Email VARCHAR(40) NOT NULL
+        );
+        """)
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS phone(
+            PhoneId PRIMARY KEY,
+            CustomerId INT FOREIGN KEY REFERENCES customers(CustomerId),
+            PhoneNumber VARCHAR(50)
+        );
+        """)
 
 
     # conn.commit()
