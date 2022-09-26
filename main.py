@@ -12,13 +12,20 @@ with conn.cursor() as cur:
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS customers(
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(40),
-        lastname VARCHAR(60) NOT NULL,
-        email VARCHAR(40) NOT NULL,
-        phone VARCHAR(40)
+        CustomerId SERIAL PRIMARY KEY,
+        Name VARCHAR(40),
+        Lastname VARCHAR(60) NOT NULL,
+        Email VARCHAR(40) NOT NULL
     );
     """)
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS phone(
+        PhoneId PRIMARY KEY,
+        CustomerId INT FOREIGN KEY REFERENCES customers(CustomerId),
+        PhoneNumber VARCHAR(50)
+    );
+    """)
+
 
     # conn.commit()
 
