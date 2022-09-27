@@ -38,7 +38,15 @@ with conn.cursor() as cur:
         """, (PhoneNumber,))
         conn.commit()
 
+    # Телефон для существующего клиента
+    def add_phone(CustomerId, PhoneNumber):
+        cur.execute("""
+                    INSERT INTO phone(CustomerId, PhoneNumber) VALUES(%s, %s);
+                """, (CustomerId, PhoneNumber,))
+        conn.commit()
+
     # create_tables()
     # add_new_customer(cur, 'Nick', 'Mull', 'g12131@mail.ru', '8921337859')
+    # add_phone(4, '674870000000')
 
 conn.close()
