@@ -56,15 +56,24 @@ with conn.cursor() as cur:
         cur.execute(sql_update, (Name, LastName, Email, CustomerId))
         conn.commit()
 
+
     #  удалить телефон для существующего клиента
     def delete_phone(CustomerId):
         cur.execute("DELETE FROM phone WHERE PhoneId = %s", (CustomerId,))
         conn.commit()
 
 
+    # удаляем существующего клиента
+    def delete_customer(CustomerId):
+        cur.execute("DELETE FROM customers WHERE CustomerId = %s", (CustomerId,))
+        cur.execute("DELETE FROM phone WHERE PhoneId = %s", (CustomerId,))
+        conn.commit()
+
+
+    delete_customer(10)
     # delete_phone(4)
     # create_tables()
-    # add_new_customer(cur, 'Nick', 'Mull', 'g12131@mail.ru', '8921337859')
+    # add_new_customer(cur, 'Marusya', 'Chuvakova', 'chuvakova@yahoo.com', '10-13-440-000')
     # add_phone(4, '674870000000')
     # update_customer(5, 'Simon', 'Duhov', 'sima@noll.rom')
 
