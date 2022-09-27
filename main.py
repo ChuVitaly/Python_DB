@@ -27,6 +27,7 @@ with conn.cursor() as cur:
             """)
         conn.commit()
 
+
     # Заполняем таблицу
     def add_new_customer(cur, Name, LastName, Email, PhoneNumber):
         cur.execute("""
@@ -38,15 +39,27 @@ with conn.cursor() as cur:
         """, (PhoneNumber,))
         conn.commit()
 
+
     # Телефон для существующего клиента
     def add_phone(CustomerId, PhoneNumber):
         cur.execute("""
                     INSERT INTO phone(CustomerId, PhoneNumber) VALUES(%s, %s);
-                """, (CustomerId, PhoneNumber,))
+                """, (CustomerId, PhoneNumber))
         conn.commit()
+
+
+    # Меняем данные о клиенте
+    def update_customer(CustomerId, Name, LastName, Email):
+        sql_update = """ UPDATE customers
+                            SET Name = %s, LastName = %s, Email = %s                   
+                            WHERE CustomerId = %s """
+        cur.execute(sql_update, (Name, LastName, Email, CustomerId))
+        conn.commit()
+
 
     # create_tables()
     # add_new_customer(cur, 'Nick', 'Mull', 'g12131@mail.ru', '8921337859')
     # add_phone(4, '674870000000')
+    # update_customer(5, 'Simon', 'Duhov', 'sima@noll.rom')
 
 conn.close()
