@@ -70,7 +70,17 @@ with conn.cursor() as cur:
         conn.commit()
 
 
-    delete_customer(10)
+    # поиск клиента по данным
+    def find_customer(Name=None, LastName=None, Email=None, PhoneNumber=None):
+        cur.execute("""
+                SELECT * FROM customers, phone WHERE Name = %s OR LastName = %s OR Email = %s OR PhoneNumber =%s
+                """, (Name, LastName, Email, PhoneNumber))
+        row = cur.fetchone()
+        print(row)
+
+
+    # find_customer(LastName='Mustang')
+    # delete_customer(10)
     # delete_phone(4)
     # create_tables()
     # add_new_customer(cur, 'Marusya', 'Chuvakova', 'chuvakova@yahoo.com', '10-13-440-000')
