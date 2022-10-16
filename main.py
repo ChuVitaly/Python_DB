@@ -1,4 +1,5 @@
 import psycopg2
+import pprint
 
 conn = psycopg2.connect(database="customer_db", user="postgres", password="583410")
 with conn.cursor() as cur:
